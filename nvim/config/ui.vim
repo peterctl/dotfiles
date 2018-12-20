@@ -3,13 +3,14 @@
 " Set colorscheme.
 colorscheme onedark
 
-" Transparent background.
-if IsFlagSet('g:transparent_bg')
-	hi Normal guibg=NONE ctermbg=NONE
-end
-
 " Highlight current line.
 set cursorline
+
+" Transparent background.
+if IsFlagSet('g:transparent_bg')
+	set nocursorline
+	hi Normal guibg=NONE ctermbg=NONE
+endif
 
 " Enable line numbers.
 set number
