@@ -3,7 +3,6 @@
 " General plugins.
 Plug 'joshdick/onedark.vim' " Color scheme
 Plug 'nightsense/carbonized' " Color scheme for limited 16 color terminals
-Plug 'sheerun/vim-polyglot' " Language support
 Plug 'vim-airline/vim-airline' " Statusline
 Plug 'scrooloose/nerdtree' " File tree sidebar
 Plug 'jistr/vim-nerdtree-tabs' " Better tab management for NERDTree
@@ -57,6 +56,10 @@ Plug 'autozimu/LanguageClient-neovim', {
 " Golang related plugins.
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
+
+" vim-polyglot has to go after vim-go
+" https://github.com/fatih/vim-go/issues/2045
+Plug 'sheerun/vim-polyglot', { 'do': './build' } " Language support
 
 " C/C++ related plugins.
 Plug 'zchee/deoplete-clang'
