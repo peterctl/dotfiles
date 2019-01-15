@@ -1,15 +1,19 @@
 " UI configuration.
 
 " Set colorscheme.
-colorscheme onedark
+exec 'colorscheme' g:colorscheme
 
 " Highlight current line.
 set cursorline
 
 " Transparent background.
-if IsFlagSet('g:transparent_bg')
+if IsFlagSet('g:transparent_background')
 	set nocursorline
 	hi Normal guibg=NONE ctermbg=NONE
+endif
+
+if ! IsFlagSet('g:disable_special_characters')
+    let g:airline_powerline_fonts = 1
 endif
 
 " Enable line numbers.
@@ -25,6 +29,8 @@ else
 	set norelativenumber
 endif
 
+" Show indentation ruler at first indentation level.
+let g:indentLine_showFirstIndentLevel = 1
 
 " Show matching brackets and parentheses.
 set showmatch
@@ -37,6 +43,9 @@ set wildmenu
 
 " Minimum lines to keep above and below cursor.
 set scrolloff=3
+
+" Minimum lines to keep before and after cursor.
+set sidescrolloff=5
 
 " Automatically fold code.
 set foldenable

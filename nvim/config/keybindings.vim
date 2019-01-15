@@ -12,7 +12,7 @@ noremap <buffer> <silent> 0 g0
 noremap <buffer> <silent> $ g$
 
 " Disallow navigation using arrow keys.
-if IsFlagSet("g:no_noob_mode")
+if IsFlagSet("g:disable_noob_mode")
     map <Left> <Nop>
     map <Right> <Nop>
     map <Up> <Nop>

@@ -1,24 +1,34 @@
-" This file is loaded before anything else. Its purpose is to define the way
-" that plugins and configuration should be loaded. Anything else, like actual
-" configuration or function definition, should be placed inside the config
-" directory. Also, any possible configurations should also be set inside the
-" config directory, and if they should be configurable from a setting in this
-" file, that should be a global variable that defines the way the actual
-" configuration is set.
+" This file is loaded before anything else in the dotfiles. Its purpose is
+" to define the default way that plugins and configuration should be loaded.
+" To override any variable in this file simply set that variable in the rc
+" file before sourcing init.vim from the dotfiles. As such, only variable
+" definitions should go here. Any possible configurations should also be set
+" inside the config/ directory, and if they should be configurable from a
+" variable in this file, then that variable should have a global scope.
+
+" Dynamically set the colorscheme.
+if !exists('g:colorscheme')
+    let g:colorscheme = 'onedark'
+endif
 
 " Override the background color settigs in the colorscheme and make the
 " background transparent.
-let g:transparent_bg = 0
+if !exists('g:transparent_background')
+    let g:transparent_background = 0
+endif
 
 " Enable relative line numbering at startup.
-let g:relative_line_numbers = 1
+if !exists('g:relative_line_numbers')
+    let g:relative_line_numbers = 1
+endif
 
 " Disable navigation using arrow keys.
-let g:no_noob_mode = 0
+if !exists('g:disable_noob_mode')
+    let g:disable_noob_mode = 0
+endif
 
-" Enable the autocompletion system at startup.
-let g:deoplete#enable_at_startup = 1
+" Disable special characters like powerline icons.
+if !exists('g:disable_special_characters')
+    let g:disable_special_characters = 0
+endif
 
-let g:airline_powerline_fonts = 1
-
-let g:indentLine_showFirstIndentLevel = 1

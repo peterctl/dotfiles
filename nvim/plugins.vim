@@ -1,8 +1,11 @@
 " Plugin definitions.
 
+" Color schemes
+Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
+Plug 'nightsense/carbonized' " For limited 16 color terminals
+
 " General plugins.
-Plug 'joshdick/onedark.vim' " Color scheme
-Plug 'nightsense/carbonized' " Color scheme for limited 16 color terminals
 Plug 'vim-airline/vim-airline' " Statusline
 Plug 'scrooloose/nerdtree' " File tree sidebar
 Plug 'jistr/vim-nerdtree-tabs' " Better tab management for NERDTree

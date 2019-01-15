@@ -1,6 +1,4 @@
 " NeoVim configuration by PeterCP.
-" This file should be on the root of the NeoVim configuration directory (e.g.
-" $XDG_CONFIG_HOME/nvim) since all paths will be relative to this file.
 
 " The configuration directory is structured as follows:
 " - plugins.vim: All plugin definitions (e.g. Plug '<plugin>') go here.

@@ -27,5 +27,6 @@ set hidden
 " Gutentag tags output folder.
 let g:gutentags_cache_dir = '~/.cache/nvim/gutentags'
 
+" Enable the autocompletion system at startup.
 let g:deoplete#enable_at_startup = 1
 
