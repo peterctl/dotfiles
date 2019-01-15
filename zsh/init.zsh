@@ -1,5 +1,9 @@
 # Directory containing current file.
-ROOT=${0:a:h}
+ZSHROOT=${0:a:h}
+
+# Remove / from wordchars so that it's taken as a word delimiter.
+# WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # Original
+WORDCHARS='*?[]~=&;!#$%^(){}<>'
 
 # Plugins
 source ~/.zplug/init.zsh
@@ -9,14 +13,43 @@ zplug "zsh-users/zsh-history-substring-search"
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 zplug load
 
-# Spaceship theme configuration.
-source $ROOT/spaceship.zsh
+# Detect running OS.
+uname="$(uname -s)"
+case $uname in
+    Linux*)  machine="linux";;
+    Darwin*) machine="macos";;
+    CYGWIN*) machine="cygwin";;
+    MINGW*)  machine="mingw";;
+    *)       machine="unknown";;
+esac
+unset uname
+
+# Settings for the spaceship theme.
+SPACESHIP_CHAR_SYMBOL="$ "
+SPACESHIP_CHAR_SYMBOL_ROOT="# "
+SPACESHIP_CHAR_SYMBOL_SECONDARY="> "
+SPACESHIP_EXIT_CODE_SHOW="true"
+SPACESHIP_EXIT_CODE_SYMBOL="!"
+SPACESHIP_JOBS_SYMBOL="\u231B"
+if [[ "$machine" == "macos" ]]; then
+    SPACESHIP_DIR_LOCK_SYMBOL=" \U1F512"
+fi
+
+# Colorize output.
+if [[ "$machine" == "macos" ]]; then
+    export CLICOLOR=1
+else
+    alias ls='ls --color'
+    alias grep='grep --color'
+fi
+
+# Alias definitions.
+alias ls='ls -Fh'
+alias la='ls -A'
+alias ll='ls -Al'
 
 # Load inputrc to correctly setup special keys.
-source $ROOT/inputrc.zsh
-
-# Source alias definitions.
-source $ROOT/alias.zsh
+# source $ZSHROOT/inputrc.zsh
 
 # Bind keys for history substring search in regular mode.
 bindkey '^[[A' history-substring-search-up
