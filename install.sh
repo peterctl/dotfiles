@@ -1,19 +1,5 @@
 #!/bin/bash
 
-ROOT=$(realpath $(dirname $0))
-ROOT=${ROOT/$HOME/\~}
-
-# Add a line to a file if it is not already there
-add_line() {
-    local file="$1"
-    local line="$2" 
-    if ! grep "$line" "$file" > /dev/null 2>&1 ; then
-        echo "$line" >> "$file"
-        return 0
-    fi
-    return 1
-}
-
 # Color helpers.
 GREEN="\033[0;32m"
 YELLOW="\033[1;33m"
@@ -31,21 +17,50 @@ error() {
     echo -e "[${RED}ERROR${RESET}] $@"
 }
 
+# Get value for DOTROOT.
+if [ -z "$DOTROOT" ]; then
+    if ! which realpath; then
+        error "Root directory could not be inferred because realpath is not installed in your system"
+        error "To fix this, either install realpath or set the environment variable DOTROOT"
+        exit 1
+    else
+        : ${DOTROOT:=$(realpath $(dirname $0))}
+    fi
+fi
+DOTROOT=${DOTROOT/$HOME/\~}
+
+# Add a line to a file if it is not already there
+add_line() {
+    local file="$1"
+    local line="$2"
+    if ! grep "$line" "$file" > /dev/null 2>&1 ; then
+        echo "$line" >> "$file"
+        return 0
+    fi
+    return 1
+}
+
 # NeoVim target.
 install_nvim() {
-    info "Installing NeoVim configuration..."
-    if ! add_line ~/.config/nvim/init.vim "source $ROOT/nvim/init.vim"; then
+    # info "Installing NeoVim configuration..."
+    if add_line ~/.config/nvim/init.vim "source $DOTROOT/nvim/init.vim"; then
+        info "NeoVim configuration added."
+    else
         warn "NeoVim's RC was already configured."
     fi
-    if ! add_line ~/.vimrc "source $ROOT/nvim/init.vim"; then
+    if add_line ~/.vimrc "source $DOTROOT/nvim/init.vim"; then
+        info "Vim configuration added."
+    else
         warn "Vim's RC was already configured."
     fi
 }
 
 # Zsh target.
 install_zsh() {
-    info "Installing Zsh configuration..."
-    if ! add_line ~/.zshrc "source $ROOT/zsh/init.zsh"; then
+    # info "Installing Zsh configuration..."
+    if add_line ~/.zshrc "source $DOTROOT/zsh/init.zsh"; then
+        info "Zsh configuration added."
+    else
         warn "Zsh's RC was already configured."
     fi
 }
