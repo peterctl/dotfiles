@@ -31,6 +31,7 @@ SPACESHIP_CHAR_SYMBOL_SECONDARY="> "
 SPACESHIP_EXIT_CODE_SHOW="true"
 SPACESHIP_EXIT_CODE_SYMBOL="!"
 SPACESHIP_JOBS_SYMBOL="\u231B"
+SPACESHIP_GIT_STATUS_DELETED="x"
 if [[ "$machine" == "macos" ]]; then
     SPACESHIP_DIR_LOCK_SYMBOL=" \U1F512"
 fi
@@ -49,7 +50,29 @@ alias la='ls -A'
 alias ll='ls -Al'
 
 # Load inputrc to correctly setup special keys.
-# source $ZSHROOT/inputrc.zsh
+function __load_keybindings_from_inputrc () {
+    local SOURCES=(
+        '/etc/inputrc'
+        '~/.inputrc'
+    )
+    local TESTS=(
+        '/^\"/! d;'
+        's/^/bindkey -- /;'
+        # 's/\\e/\x1B/;'
+        's/\":/\"/;'
+        's/history-search/history-beginning-search/'
+    )
+
+    local VALID_SOURCES=()
+    for s in $SOURCES; do
+        test -f $s && VALID_SOURCES+=($s)
+    done
+
+    if ! [ -z $VALID_SOURCES ]; then
+        eval "$(sed -e "$TESTS" $VALID_SOURCES)"
+    fi
+}
+__load_keybindings_from_inputrc
 
 # Bind keys for history substring search in regular mode.
 bindkey '^[[A' history-substring-search-up
