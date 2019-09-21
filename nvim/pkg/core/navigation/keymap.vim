@@ -1,10 +1,3 @@
-" Keybinding configuration.
-
-" NeoSnipped mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
 " Make navigation work on wrapped lines.
 noremap <buffer> <silent> k gk
 noremap <buffer> <silent> j gj

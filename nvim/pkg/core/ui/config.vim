@@ -8,25 +8,12 @@ set cursorline
 
 " Transparent background.
 if IsFlagSet('g:transparent_background')
-	set nocursorline
-	hi Normal guibg=NONE ctermbg=NONE
+    set nocursorline
+    hi Normal guibg=NONE ctermbg=NONE
 endif
 
 if ! IsFlagSet('g:disable_special_characters')
     let g:airline_powerline_fonts = 1
-endif
-
-" Enable line numbers.
-set number
-if IsFlagSet('g:relative_line_numbers')
-	set relativenumber
-	augroup numbertoggle
-		autocmd!
-		autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-		autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-	augroup END
-else
-	set norelativenumber
 endif
 
 " Show indentation ruler at first indentation level.
@@ -80,3 +67,6 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = -32
 
+" TODO source line-numbers and airline
+exec 'source ' . expand('<sfile>:p:h') . '/airline.vim'
+exec 'source ' . expand('<sfile>:p:h') . '/line-numbers.vim'

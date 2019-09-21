@@ -1,5 +1,3 @@
-" Formatting configuration.
-
 " Do not wrap long lines.
 set nowrap
 
@@ -21,3 +19,8 @@ set tabstop=4
 " Let backspace delete indents.
 set softtabstop=4
 
+" Gutentag tags output folder.
+let g:gutentags_cache_dir = '~/.cache/nvim/gutentags'
+
+" Enable the autocompletion system at startup.
+let g:deoplete#enable_at_startup = 1

@@ -25,7 +25,7 @@ call airline#parts#define('FileInfoPart', {'function': 'FileInfo'})
 let g:airline_section_z = airline#section#create(['FileInfoPart'])
 
 " Airline settings.
-" ▒
+" Another cool separator: ▒
 let g:airline_right_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_alt_sep = '|'
@@ -38,10 +38,10 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Tmuxline settings.
-let g:tmuxline_separators = {
-    \ 'left': '',
-    \ 'left_alt': '|',
-    \ 'right': '',
-    \ 'right_alt': '|',
-    \ 'space': ' ',
-\ }
+" let g:tmuxline_separators = {
+"     \ 'left': '',
+"     \ 'left_alt': '|',
+"     \ 'right': '',
+"     \ 'right_alt': '|',
+"     \ 'space': ' ',
+" \ }

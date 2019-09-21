@@ -14,7 +14,7 @@ endif
 " Override the background color settigs in the colorscheme and make the
 " background transparent.
 if !exists('g:transparent_background')
-    let g:transparent_background = 0
+    let g:transparent_background = 1
 endif
 
 " Enable relative line numbering at startup.
