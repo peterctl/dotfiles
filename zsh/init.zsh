@@ -1,9 +1,9 @@
 # Directory containing current file.
 ZSHROOT=${0:a:h}
 
-# Remove / from wordchars so that it's taken as a word delimiter.
+# Remove some chars from wordchars so that they're taken as word delimiters.
 # WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # Original
-WORDCHARS='*?[]~=&;!#$%^(){}<>'
+WORDCHARS='*?[]~&;!#$%^(){}<>'
 
 # Plugins
 source ~/.zplug/init.zsh
@@ -39,13 +39,14 @@ fi
 # Colorize output.
 if [[ "$machine" == "macos" ]]; then
     export CLICOLOR=1
+    lscmd='ls'
 else
-    alias ls='ls --color'
+    lscmd='ls --color'
     alias grep='grep --color'
 fi
 
 # Alias definitions.
-alias ls='ls -Fh'
+alias ls="$lscmd -Fh"
 alias la='ls -A'
 alias ll='ls -Al'
 
