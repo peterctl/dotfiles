@@ -67,7 +67,11 @@ install_zsh() {
 
 # Tmux target.
 install_tmux() {
-    warn "Tmux is not yet added."
+    if add_line ~/.tmux.conf "source-file $DOTROOT/tmux/tmux.conf"; then
+        info "Tmux configuration added."
+    else
+        warn "Tmux's RC was already configured."
+    fi
 }
 
 # If no targets were given then install all of them.
