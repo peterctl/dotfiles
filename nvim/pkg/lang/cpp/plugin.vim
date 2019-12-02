@@ -1,2 +1,2 @@
-Plugin 'zchee/deoplete-clang', {'after': ['shougo/deoplete.nvim']}
+" Plugin 'zchee/deoplete-clang', {'after': ['shougo/deoplete.nvim']}
 

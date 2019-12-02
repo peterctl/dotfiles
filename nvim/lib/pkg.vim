@@ -54,7 +54,9 @@ function InitPackageFramework(nvim_root)
     if !has_key(g:package_groups, 'lang')
         let g:package_groups['lang'] = a:nvim_root . '/pkg/lang'
     endif
+endfunction
 
+function ResolvePackageList()
     let g:package_cache = []
     for [grp_name, grp_root] in items(g:package_groups)
         if index(g:exclude_packages, grp_name) >= 0

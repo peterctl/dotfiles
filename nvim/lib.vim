@@ -22,6 +22,8 @@ call InitPackageFramework(g:nvimroot)
 
 " Wrap the rest of the config initialization in a function to be called later.
 function InitVimConfig()
+    call ResolvePackageList()
+
     " Load wrapped plugin definitions from packages.
     call LoadSectionFromAllPackages('plugin')
 
@@ -51,5 +53,5 @@ function InitVimConfig()
 
     " Load configs and keymaps.
     call LoadSectionFromAllPackages('config')
-    call LoadSectionFromAllPackages('keymaps')
+    call LoadSectionFromAllPackages('keymap')
 endfunction

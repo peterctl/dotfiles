@@ -1,8 +1,8 @@
 " Autocompletion framework
-Plugin 'shougo/deoplete.nvim', {
-        \ 'do': ':UpdateRemotePlugins',
-        \ 'after': ['shougo/denite.nvim']
-        \ }
+" Plugin 'shougo/deoplete.nvim', {
+"         \ 'do': ':UpdateRemotePlugins',
+"         \ 'after': ['shougo/denite.nvim']
+"         \ }
 
 " Language Server Protocol support.
 Plugin 'autozimu/LanguageClient-neovim', {
