@@ -19,7 +19,7 @@ error() {
 
 # Get value for DOTROOT.
 if [ -z "$DOTROOT" ]; then
-    if ! which realpath; then
+    if ! which realpath > /dev/null; then
         error "Root directory could not be inferred because realpath is not installed in your system"
         error "To fix this, either install realpath or set the environment variable DOTROOT"
         exit 1
@@ -43,16 +43,14 @@ add_line() {
 # NeoVim target.
 install_nvim() {
     # info "Installing NeoVim configuration..."
-    if add_line ~/.config/nvim/init.vim "source $DOTROOT/nvim/init.vim"; then
-        info "NeoVim configuration added."
-    else
-        warn "NeoVim's RC was already configured."
+    if [ ! -d ~/.SpaceVim ]; then
+        info "Installing SpaceVim"
+        curl -sLf https://spacevim.org/install.sh | bash -s -- --install
+        info "SpaceVim installed"
     fi
-    if add_line ~/.vimrc "source $DOTROOT/nvim/init.vim"; then
-        info "Vim configuration added."
-    else
-        warn "Vim's RC was already configured."
-    fi
+
+    ln -sf ${DOTROOT/\~/$HOME}/nvim ~/.SpaceVim.d 
+    info "SpaceVim user config linked"
 }
 
 # Zsh target.
