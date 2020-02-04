@@ -49,30 +49,23 @@ call SpaceVim#layers#load("shell", {
 call SpaceVim#layers#load("tools")
 call SpaceVim#layers#load("VersionControl")
 
-function! BootstrapBefore()
-endfunction
+set list
 
 function! BootstrapAfter()
   noremap <C-E> 3<C-E>
   set scrolloff=3
   set sidescrolloff=3
   set whichwrap=b,s,h,l,[,],<,>
-  set list
   set listchars=tab:›\ ,eol:¬,trail:⋅,nbsp:•,extends:>,precedes:<
-  call SpaceVim#layers#core#statusline#register_sections("cursorpos", "StatuslineCursorPos")
+  call SpaceVim#layers#core#statusline#register_sections("cursorpos", {-> " %{StatuslineCursorPos()} "})
+endfunction
+
+function s:hrn(n)
+  return substitute(a:n, '\d\@<=\(\(\d\{3\}\)\+\)$', ',&', 'g')
 endfunction
 
 function StatuslineCursorPos()
-  if g:spacevim_enable_powerline_fonts == 0
-    let _l = "ln:"
-    let _c = "cn:"
-  else
-    let _l = "\uE0A1:"
-    let _c = "\uE0A3:"
-  endif
-
-  function! s:hrn(n)  " Human Readable Number
-    return substitute(a:n, '\d\@<=\(\(\d\{3\}\)\+\)$', ',&', 'g')
-  endfunction
-  return " " . _l . s:hrn(line('.')) . "/" . s:hrn(line('$')) . " " . _c . s:hrn(col('.')) . "/" . s:hrn(col('$')) . " "
+  " let _l = "\uE0A1:"
+  " let _c = "\uE0A3:"
+  return s:hrn(line('.')) . "/" . s:hrn(line('$')) . " : " . s:hrn(col('.')) . "/" . s:hrn(col('$'))
 endfunction
