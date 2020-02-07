@@ -7,10 +7,17 @@ WORDCHARS='*?[]~&;!#$%^(){}<>'
 
 # Plugins
 source ~/.zplug/init.zsh
+
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+
+if ! zplug check; then
+    if ! zplug install; then
+        echo "[ERROR] Could not install zplug plugins. Please run 'zplug install' manually"
+    fi
+fi
 zplug load
 
 # Detect running OS.

@@ -7,7 +7,7 @@ let g:spacevim_buffer_index_type = 4
 let g:spacevim_enable_tabline_filetype_icon = 1
 let g:spacevim_enable_statusline_mode = 1
 let g:spacevim_default_indent = 4
-let g:spacevim_filemanager = "defx"
+" let g:spacevim_filemanager = "defx"
 
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1

@@ -8,24 +8,44 @@ RESET="\033[0m"
 
 # Logging helpers.
 info() {
-    echo -e "[${GREEN} INFO${RESET}] $@"
+    echo -e "[${GREEN} INFO${RESET}]" "$@"
 }
 warn() {
-    echo -e "[${YELLOW} WARN${RESET}] $@"
+    echo -e "[${YELLOW} WARN${RESET}]" "$@"
 }
 error() {
-    echo -e "[${RED}ERROR${RESET}] $@"
+    echo -e "[${RED}ERROR${RESET}]" "$@"
 }
+fatal() {
+    echo -e "[${RED}FATAL${RESET}]" "$@"
+    exit 1
+}
+
+# Helper to download a file script.
+if CURL=$(command -v curl); then
+    download() {
+        $CURL -fsL --proto-redir -all,https "$1"
+    }
+elif WGET=$(command -v wget); then
+    download() {
+        $WGET -q --https-only -O- "$1"
+    }
+else
+    fatal "Could not find curl or wget on the system. Please install one of them"
+fi
 
 # Get value for DOTROOT.
 if [ -z "$DOTROOT" ]; then
-    if ! which realpath > /dev/null; then
-        error "Root directory could not be inferred because realpath is not installed in your system"
-        error "To fix this, either install realpath or set the environment variable DOTROOT"
-        exit 1
+    if REALPATH=$(command -v realpath) && DIRNAME=$(command -v dirname); then
+        dir=$($REALPATH $($DIRNAME $0))
     else
-        : ${DOTROOT:=$(realpath $(dirname $0))}
+        dir="${0%/*}"
+        dir="${dir##*/}"
+        if [ "${dir%%/*}" ]; then
+            dir=$PWD/$dir
+        fi
     fi
+    DOTROOT=$dir
 fi
 DOTROOT=${DOTROOT/$HOME/\~}
 
@@ -45,8 +65,11 @@ install_nvim() {
     # info "Installing NeoVim configuration..."
     if [ ! -d ~/.SpaceVim ]; then
         info "Installing SpaceVim"
-        curl -sLf https://spacevim.org/install.sh | bash -s -- --install
-        info "SpaceVim installed"
+        if download https://spacevim.org/install.sh | bash -s -- --install; then
+            info "SpaceVim installed"
+        else
+            fatal "SpaceVim could not be installed"
+        fi
     fi
 
     ln -sf ${DOTROOT/\~/$HOME}/nvim ~/.SpaceVim.d 
@@ -56,6 +79,14 @@ install_nvim() {
 # Zsh target.
 install_zsh() {
     # info "Installing Zsh configuration..."
+    if [ ! -d ~/.zplug ]; then
+        info "Installing Zplug"
+        if download https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh; then
+            info "Zplug installed"
+        else
+            fatal "Zplug could not be installed"
+        fi
+    fi
     if add_line ~/.zshrc "source $DOTROOT/zsh/init.zsh"; then
         info "Zsh configuration added."
     else
