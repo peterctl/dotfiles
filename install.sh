@@ -72,7 +72,7 @@ install_nvim() {
         fi
     fi
 
-    ln -sf ${DOTROOT/\~/$HOME}/nvim ~/.SpaceVim.d 
+    ln -sf ${DOTROOT/\~/$HOME}/nvim ~/.SpaceVim.d
     info "SpaceVim user config linked"
 }
 

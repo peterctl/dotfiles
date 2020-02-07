@@ -9,16 +9,6 @@ let g:spacevim_enable_statusline_mode = 1
 let g:spacevim_default_indent = 4
 " let g:spacevim_filemanager = "defx"
 
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-
-let g:indentLine_showFirstIndentLevel = 1
-let g:indentLine_char = '┊'
-let g:indentLine_first_char = g:indentLine_char
-if &term is# "linux"
-  let g:indentLine_enabled = 0
-endif
-
 let g:_spacevim_bootstrap_before = "BootstrapBefore"
 let g:_spacevim_bootstrap_after = "BootstrapAfter"
 
@@ -49,7 +39,23 @@ call SpaceVim#layers#load("shell", {
 call SpaceVim#layers#load("tools")
 call SpaceVim#layers#load("VersionControl")
 
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+
+let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_char = '┊'
+let g:indentLine_first_char = g:indentLine_char
+if &term is# "linux"
+  let g:indentLine_enabled = 0
+endif
+
 set list
+
+" Enable changing cursor outside neovim
+if !has('nvim')
+  let &t_EI = "\e[1 q"
+  let &t_SI = "\e[5 q"
+endif
 
 function! BootstrapAfter()
   noremap <C-E> 3<C-E>
