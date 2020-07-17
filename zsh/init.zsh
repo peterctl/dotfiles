@@ -21,15 +21,13 @@ fi
 zplug load
 
 # Detect running OS.
-uname="$(uname -s)"
-case $uname in
+case "$(uname -s)" in
     Linux*)  machine="linux";;
     Darwin*) machine="macos";;
     CYGWIN*) machine="cygwin";;
     MINGW*)  machine="mingw";;
     *)       machine="unknown";;
 esac
-unset uname
 
 # Settings for the spaceship theme.
 SPACESHIP_CHAR_SYMBOL="$ "
@@ -92,7 +90,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 HISTFILE=~/.history
 HISTSIZE=1000
 SAVEHIST=$HISTSIZE
-setopt appendhistory extendedglob
+setopt appendhistory sharehistory
+
+setopt extendedglob
 
 # Add GOPATH to PATH
 GOPATH=~/go
