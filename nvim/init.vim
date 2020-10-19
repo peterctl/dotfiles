@@ -7,9 +7,9 @@ let g:spacevim_buffer_index_type = 4
 let g:spacevim_enable_tabline_filetype_icon = 1
 let g:spacevim_enable_statusline_mode = 1
 let g:spacevim_default_indent = 4
+let g:spacevim_project_rooter_automatically = 0
 " let g:spacevim_filemanager = "defx"
 
-let g:_spacevim_bootstrap_before = "BootstrapBefore"
 let g:_spacevim_bootstrap_after = "BootstrapAfter"
 
 let g:spacevim_custom_plugins = [
