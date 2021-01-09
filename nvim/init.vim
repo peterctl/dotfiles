@@ -8,6 +8,7 @@ let g:spacevim_enable_tabline_filetype_icon = 1
 let g:spacevim_enable_statusline_mode = 1
 let g:spacevim_default_indent = 4
 let g:spacevim_project_rooter_automatically = 0
+let g:spacevim_autocomplete_method = "coc"
 " let g:spacevim_filemanager = "defx"
 
 let g:_spacevim_bootstrap_after = "BootstrapAfter"
@@ -17,9 +18,15 @@ let g:spacevim_custom_plugins = [
   \ [ "sgur/vim-editorconfig", { "merged": 0 } ],
   \ ]
 
-call SpaceVim#layers#load("autocomplete", {
-  \ "auto-completion-return-key-behavior": "nil",
-  \ "auto-completion-tab-key-behavior": "cycle",
+" call SpaceVim#layers#load("autocomplete", {
+  " \ "auto-completion-return-key-behavior": "nil",
+  " \ "auto-completion-tab-key-behavior": "cycle",
+  " \ })
+call SpaceVim#layers#load("lsp", {
+  \ "filetypes": ["rust"],
+  \ "override_command": {
+    \ "rust": ["rustup", "run", "nightly", "rust-analyzer-preview"],
+    \ },
   \ })
 call SpaceVim#layers#load("colorscheme")
 call SpaceVim#layers#load("denite")
@@ -30,7 +37,6 @@ call SpaceVim#layers#load("indentmove")
 call SpaceVim#layers#load("lang#c")
 call SpaceVim#layers#load("lang#go")
 call SpaceVim#layers#load("lang#rust")
-call SpaceVim#layers#load("lsp")
 call SpaceVim#layers#load("operator")
 call SpaceVim#layers#load("shell", {
   \ "default-position": "top",
