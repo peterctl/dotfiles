@@ -16,6 +16,7 @@ let g:_spacevim_bootstrap_after = "BootstrapAfter"
 let g:spacevim_custom_plugins = [
   \ [ "tpope/vim-sleuth", { "merged": 0 } ],
   \ [ "sgur/vim-editorconfig", { "merged": 0 } ],
+  \ [ "hashivim/vim-terraform", { "merged": 0 } ],
   \ ]
 
 " call SpaceVim#layers#load("autocomplete", {
@@ -64,7 +65,7 @@ if !has('nvim')
 endif
 
 function! BootstrapAfter()
-  noremap <C-E> 3<C-E>
+  noremap <silent> <Tab> :wincmd w<CR>
   set scrolloff=3
   set sidescrolloff=3
   set whichwrap=b,s,h,l,[,],<,>
