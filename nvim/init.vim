@@ -37,6 +37,7 @@ call SpaceVim#layers#load("incsearch")
 call SpaceVim#layers#load("indentmove")
 call SpaceVim#layers#load("lang#c")
 call SpaceVim#layers#load("lang#go")
+call SpaceVim#layers#load("lang#groovy")
 call SpaceVim#layers#load("lang#rust")
 call SpaceVim#layers#load("operator")
 call SpaceVim#layers#load("shell", {

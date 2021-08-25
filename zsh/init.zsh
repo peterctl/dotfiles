@@ -54,6 +54,9 @@ fi
 alias ls="$lscmd -Fh"
 alias la='ls -A'
 alias ll='ls -Al'
+alias kc=kubectl
+alias dk=docker
+alias dkc=docker-compose
 
 # Load inputrc to correctly setup special keys.
 function __load_keybindings_from_inputrc () {
@@ -98,3 +101,6 @@ setopt extendedglob
 GOPATH=~/go
 GOBIN=$GOPATH/bin
 PATH=$GOBIN:$PATH
+
+# Setup command completions
+[ -x kubectl ] && source <(kubectl completion zsh)
