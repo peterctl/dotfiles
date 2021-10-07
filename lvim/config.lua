@@ -26,12 +26,12 @@ lvim.builtin.which_key.on_config_done = function (wk)
       -- Mappings for Hop
       s = {
         name = "+Hop Motions",
-        a = { "<Cmd>HopChar1<CR>", "Hop search 1 character" },
-        s = { "<Cmd>HopChar2<CR>", "Hop search 2 characters" },
-        w = { "<Cmd>HopWord<CR>", "Hop search words" },
-        l = { "<Cmd>HopLineStart<CR>", "Hop search lines ( ^ )" },
-        L = { "<Cmd>HopLineStart<CR>", "Hop search lines ( 0 )" },
-        ["/"] = { "<Cmd>HopPattern<CR>", "Hop search pattern" },
+        a = { function() require("hop").hint_char1() end, "Hop search 1 character" },
+        s = { function() require("hop").hint_char2() end, "Hop search 2 characters" },
+        w = { function() require("hop").hint_words() end, "Hop search words" },
+        l = { function() require("hop").hint_lines_skip_whitespace() end, "Hop search lines ( ^ )" },
+        L = { function() require("hop").hint_lines() end, "Hop search lines ( 0 )" },
+        ["/"] = { function() require("hop").hint_pattern() end, "Hop search pattern" },
       },
     }, { prefix = nil, mode = mode })
   end
@@ -98,12 +98,12 @@ lvim.plugins = {
           },
           sidebar = {
               elements = { "scopes", "breakpoints", "stacks", "watches" },
-              width = 40,
+              size = 40,
               position = "left"
           },
           tray = {
               elements = { "repl" },
-              height = 10,
+              size = 10,
               position = "bottom"
           },
           floating = { max_height = nil, max_width = nil }
