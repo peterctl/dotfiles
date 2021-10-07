@@ -1,3 +1,12 @@
+# Detect running OS.
+case "$(uname -s)" in
+    Linux*)  machine="linux";;
+    Darwin*) machine="macos";;
+    CYGWIN*) machine="cygwin";;
+    MINGW*)  machine="mingw";;
+    *)       machine="unknown";;
+esac
+
 # Directory containing current file.
 ZSHROOT=${0:a:h}
 
@@ -19,15 +28,6 @@ if ! zplug check; then
     fi
 fi
 zplug load
-
-# Detect running OS.
-case "$(uname -s)" in
-    Linux*)  machine="linux";;
-    Darwin*) machine="macos";;
-    CYGWIN*) machine="cygwin";;
-    MINGW*)  machine="mingw";;
-    *)       machine="unknown";;
-esac
 
 # Settings for the spaceship theme.
 SPACESHIP_CHAR_SYMBOL="$ "
@@ -57,6 +57,7 @@ alias ll='ls -Al'
 alias kc=kubectl
 alias dk=docker
 alias dkc=docker-compose
+alias tf=terraform
 
 # Load inputrc to correctly setup special keys.
 function __load_keybindings_from_inputrc () {
@@ -103,4 +104,9 @@ GOBIN=$GOPATH/bin
 PATH=$GOBIN:$PATH
 
 # Setup command completions
-[ -x kubectl ] && source <(kubectl completion zsh)
+[ -x $(which kubectl) ] && source <(kubectl completion zsh)
+[ -x $(which fasd) ] && eval "$(fasd --init auto)"
+if [ -d /usr/share/fzf ]; then
+  source /usr/share/fzf/completion.zsh
+  source /usr/share/fzf/key-bindings.zsh
+fi
