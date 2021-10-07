@@ -72,19 +72,22 @@ install_spacevim() {
     fi
 
     # ln -sf ${DOTROOT/\~/$HOME}/nvim ~/.SpaceVim.d
-    info "SpaceVim user config linked"
+    # info "SpaceVim user config linked"
 }
 
 # LunarVim target for NeoVim.
 install_lunarvim() {
     if [ ! -d ~/.local/share/lunarvim ]; then
         info "Installing LunarVim"
-        if download https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash -s; then
+        if bash <(download https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh) --no-install-dependencies; then
             info "LunarVim installed"
         else
             fatal "LunarVim could not be installed"
         fi
     fi
+
+    ln -sf ${DOTROOT/\~/$HOME}/lvim ~/.config/lvim
+    info "LunarVim user config linked"
 }
 
 # Zsh target.

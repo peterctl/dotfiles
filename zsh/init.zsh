@@ -20,6 +20,7 @@ source ~/.zplug/init.zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
+zplug "marlonrichert/zsh-edit"
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
 if ! zplug check; then
@@ -82,7 +83,7 @@ function __load_keybindings_from_inputrc () {
         eval "$(sed -e "$TESTS" $VALID_SOURCES)"
     fi
 }
-__load_keybindings_from_inputrc
+# __load_keybindings_from_inputrc
 
 # Bind keys for history substring search in regular mode.
 bindkey '^[[A' history-substring-search-up
@@ -103,9 +104,13 @@ GOPATH=~/go
 GOBIN=$GOPATH/bin
 PATH=$GOBIN:$PATH
 
+if ! ( echo $PATH | grep ~/.local/bin ) >/dev/null; then
+  PATH=~/.local/bin:$PATH
+fi
+
 # Setup command completions
-[ -x $(which kubectl) ] && source <(kubectl completion zsh)
-[ -x $(which fasd) ] && eval "$(fasd --init auto)"
+which kubectl >/dev/null && source <(kubectl completion zsh)
+which fasd >/dev/null && eval "$(fasd --init auto)"
 if [ -d /usr/share/fzf ]; then
   source /usr/share/fzf/completion.zsh
   source /usr/share/fzf/key-bindings.zsh
