@@ -60,9 +60,8 @@ add_line() {
     return 1
 }
 
-# NeoVim target.
-install_nvim() {
-    # info "Installing NeoVim configuration..."
+# SpaceVim target for Vim.
+install_spacevim() {
     if [ ! -d ~/.SpaceVim ]; then
         info "Installing SpaceVim"
         if download https://spacevim.org/install.sh | bash -s -- --install; then
@@ -72,8 +71,20 @@ install_nvim() {
         fi
     fi
 
-    ln -sf ${DOTROOT/\~/$HOME}/nvim ~/.SpaceVim.d
+    # ln -sf ${DOTROOT/\~/$HOME}/nvim ~/.SpaceVim.d
     info "SpaceVim user config linked"
+}
+
+# LunarVim target for NeoVim.
+install_lunarvim() {
+    if [ ! -d ~/.local/share/lunarvim ]; then
+        info "Installing LunarVim"
+        if download https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | bash -s; then
+            info "LunarVim installed"
+        else
+            fatal "LunarVim could not be installed"
+        fi
+    fi
 }
 
 # Zsh target.
@@ -105,7 +116,8 @@ install_tmux() {
 
 # If no targets were given then install all of them.
 if [[ $# -eq 0 ]]; then
-    install_nvim
+    install_lunarvim
+    install_spacevim
     install_zsh
     install_tmux
     exit
@@ -116,8 +128,11 @@ while [[ $# -gt 0 ]]; do
     TARGET=$(echo "$1" | tr "[:upper:]" "[:lower:]")
     shift
     case "$TARGET" in
-        nvim|vim|neovim)
-            install_nvim
+        nvim|neovim)
+            install_lunarvim
+            ;;
+        vim)
+            install_spacevim
             ;;
         zsh)
             install_zsh
