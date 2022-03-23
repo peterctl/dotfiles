@@ -8,6 +8,7 @@ an executable
 ]]
 
 vim.opt.relativenumber = true
+vim.opt.colorcolumn = { 80, 100, 120 }
 
 -- General
 lvim.log.level = "warn"
@@ -126,7 +127,7 @@ lvim.plugins = {
     end,
   },
   {
-    "blackCauldron7/surround.nvim",
+    "ur4ltz/surround.nvim",
     config = function()
       require("surround").setup({
         load_keymaps = false, -- These are loaded above manually
