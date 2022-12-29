@@ -21,7 +21,7 @@ lvim.leader = "space"
 lvim.local_leader = "\\"
 
 -- WhichKey mappings
-lvim.builtin.which_key.on_config_done = function (wk)
+lvim.builtin.which_key.on_config_done = function(wk)
   for _, mode in ipairs({ "n", "x" }) do
     wk.register({
       -- Mappings for Hop
@@ -90,24 +90,24 @@ lvim.plugins = {
     config = function()
       local dap, dapui = require("dap"), require("dapui")
       dapui.setup({
-          icons = { expanded = "⯆", collapsed = "⯈" },
-          mappings = {
-              expand = { "<CR>", "<2-LeftMouse>" },
-              open = "o",
-              remove = "d",
-              edit = "e"
-          },
-          sidebar = {
-              elements = { "scopes", "breakpoints", "stacks", "watches" },
-              size = 40,
-              position = "left"
-          },
-          tray = {
-              elements = { "repl" },
-              size = 10,
-              position = "bottom"
-          },
-          floating = { max_height = nil, max_width = nil }
+        icons = { expanded = "⯆", collapsed = "⯈" },
+        mappings = {
+          expand = { "<CR>", "<2-LeftMouse>" },
+          open = "o",
+          remove = "d",
+          edit = "e"
+        },
+        sidebar = {
+          elements = { "scopes", "breakpoints", "stacks", "watches" },
+          size = 40,
+          position = "left"
+        },
+        tray = {
+          elements = { "repl" },
+          size = 10,
+          position = "bottom"
+        },
+        floating = { max_height = nil, max_width = nil }
       })
       dap.listeners.after.event_initialized.dapui_config = function()
         dapui.open()
@@ -144,9 +144,18 @@ lvim.plugins = {
       require("trouble").setup({})
     end,
   },
+  {
+    "akinsho/flutter-tools.nvim",
+    config = function()
+      require("flutter-tools").setup({})
+    end,
+  },
+  {
+    "HiPhish/jinja.vim",
+  },
 }
 
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.project.active = false
@@ -162,6 +171,12 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.autocommands.custom_groups = {
   -- Turn on wrapping on the quickfix window
   { "FileType", "qf", "setlocal wrap" },
+}
+
+lvim.lsp.dartls = {
+  setup = {
+    cmd = "dart ~/snap/flutter/common/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot",
+  },
 }
 
 -- generic LSP settings

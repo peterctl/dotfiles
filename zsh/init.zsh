@@ -95,7 +95,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 HISTFILE=~/.history
 HISTSIZE=1000
 SAVEHIST=$HISTSIZE
-setopt appendhistory sharehistory
+setopt appendhistory
 
 setopt extendedglob
 
