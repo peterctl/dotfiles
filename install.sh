@@ -70,9 +70,6 @@ install_spacevim() {
             fatal "SpaceVim could not be installed"
         fi
     fi
-
-    # ln -sf ${DOTROOT/\~/$HOME}/nvim ~/.SpaceVim.d
-    # info "SpaceVim user config linked"
 }
 
 # LunarVim target for NeoVim.
@@ -88,6 +85,20 @@ install_lunarvim() {
 
     ln -sf ${DOTROOT/\~/$HOME}/lvim ~/.config/lvim
     info "LunarVim user config linked"
+}
+
+install_astronvim() {
+    if [ ! -d ~/.config/nvim ]; then
+        info "Installing AstroNvim"
+        if git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim; then
+            info "AstroNvim installed"
+        else
+            fatal "AstroNvim could not be installed"
+        fi
+    fi
+
+    ln -sf ${DOTROOT/\~/$HOME}/astronvim ~/.config/nvim/lua/user
+    info "AstroNvim user config linked"
 }
 
 # Zsh target.
@@ -119,7 +130,7 @@ install_tmux() {
 
 # If no targets were given then install all of them.
 if [[ $# -eq 0 ]]; then
-    install_lunarvim
+    install_astronvim
     install_spacevim
     install_zsh
     install_tmux
@@ -131,7 +142,10 @@ while [[ $# -gt 0 ]]; do
     TARGET=$(echo "$1" | tr "[:upper:]" "[:lower:]")
     shift
     case "$TARGET" in
-        nvim|neovim)
+        nvim|neovim|astronvim)
+            install_astronvim
+            ;;
+        lvim|lunarvim)
             install_lunarvim
             ;;
         vim)
