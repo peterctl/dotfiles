@@ -77,6 +77,12 @@ lvim.builtin.which_key.mappings["l"]["D"] = {
 -- Additional Plugins
 lvim.plugins = {
   {
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
+  {
     "ray-x/lsp_signature.nvim",
     config = function()
       require("lsp_signature").setup()
@@ -160,10 +166,10 @@ lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.project.active = false
 lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+-- lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
+-- lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
