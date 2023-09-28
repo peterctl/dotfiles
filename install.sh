@@ -101,6 +101,11 @@ install_astronvim() {
     info "AstroNvim user config linked"
 }
 
+install_lazyvim() {
+    ln -sf ${DOTROOT/\~/$HOME}/lazyvim ~/.config/nvim
+    info "LazyVim user config linked"
+}
+
 # Zsh target.
 install_zsh() {
     # info "Installing Zsh configuration..."
@@ -130,7 +135,7 @@ install_tmux() {
 
 # If no targets were given then install all of them.
 if [[ $# -eq 0 ]]; then
-    install_astronvim
+    install_lazyvim
     install_spacevim
     install_zsh
     install_tmux
@@ -142,7 +147,10 @@ while [[ $# -gt 0 ]]; do
     TARGET=$(echo "$1" | tr "[:upper:]" "[:lower:]")
     shift
     case "$TARGET" in
-        nvim|neovim|astronvim)
+        nvim|neovim|lazyvim)
+            install_lazyvim
+            ;;
+        astronvim)
             install_astronvim
             ;;
         lvim|lunarvim)
