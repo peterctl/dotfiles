@@ -3,3 +3,6 @@
 -- Add any additional options here
 
 vim.g.autoformat = false
+
+vim.opt.colorcolumn = { 80, 100, 120 }
+vim.opt.whichwrap = "b,s,<,>,h,l,[,]"
