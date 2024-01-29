@@ -109,7 +109,10 @@ if ! ( echo $PATH | grep ~/.local/bin ) >/dev/null; then
 fi
 
 # Setup command completions
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 which kubectl >/dev/null && source <(kubectl completion zsh)
+which juju >/dev/null && source /usr/share/bash-completion/completions/juju
 which fasd >/dev/null && eval "$(fasd --init auto)"
 if [ -d /usr/share/fzf ]; then
   source /usr/share/fzf/completion.zsh
