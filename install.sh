@@ -72,35 +72,7 @@ install_spacevim() {
     fi
 }
 
-# LunarVim target for NeoVim.
-install_lunarvim() {
-    if [ ! -d ~/.local/share/lunarvim ]; then
-        info "Installing LunarVim"
-        if bash <(download https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh) --no-install-dependencies; then
-            info "LunarVim installed"
-        else
-            fatal "LunarVim could not be installed"
-        fi
-    fi
-
-    ln -sf ${DOTROOT/\~/$HOME}/lvim ~/.config/lvim
-    info "LunarVim user config linked"
-}
-
-install_astronvim() {
-    if [ ! -d ~/.config/nvim ]; then
-        info "Installing AstroNvim"
-        if git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim; then
-            info "AstroNvim installed"
-        else
-            fatal "AstroNvim could not be installed"
-        fi
-    fi
-
-    ln -sf ${DOTROOT/\~/$HOME}/astronvim ~/.config/nvim/lua/user
-    info "AstroNvim user config linked"
-}
-
+# LazyVim target for NeoVim.
 install_lazyvim() {
     ln -sf ${DOTROOT/\~/$HOME}/lazyvim ~/.config/nvim
     info "LazyVim user config linked"
@@ -149,12 +121,6 @@ while [[ $# -gt 0 ]]; do
     case "$TARGET" in
         nvim|neovim|lazyvim)
             install_lazyvim
-            ;;
-        astronvim)
-            install_astronvim
-            ;;
-        lvim|lunarvim)
-            install_lunarvim
             ;;
         vim)
             install_spacevim
