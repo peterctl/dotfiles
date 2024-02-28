@@ -101,20 +101,26 @@ setopt extendedglob
 
 # Add GOPATH to PATH
 GOPATH=~/go
-GOBIN=$GOPATH/bin
-PATH=$GOBIN:$PATH
+if [ -d $GOPATH ]; then
+  GOBIN=$GOPATH/bin
+  PATH=$GOBIN:$PATH
+fi
 
 if ! ( echo $PATH | grep ~/.local/bin ) >/dev/null; then
   PATH=~/.local/bin:$PATH
 fi
 
 # Setup command completions
+maybe-source() { test -f $1 && source $1; }
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 which kubectl >/dev/null && source <(kubectl completion zsh)
-which juju >/dev/null && source /usr/share/bash-completion/completions/juju
 which fasd >/dev/null && eval "$(fasd --init auto)"
-if [ -d /usr/share/fzf ]; then
-  source /usr/share/fzf/completion.zsh
-  source /usr/share/fzf/key-bindings.zsh
-fi
+maybe-source /etc/zsh_command_not_found
+maybe-source /snap/juju/current/bash_completions/juju
+maybe-source /snap/lxd/current/etc/bash_completion.d/snap.lxd.lxc
+maybe-source /usr/share/bash-completion/completions/juju
+maybe-source /usr/share/doc/fzf/examples/key-bindings.zsh
+maybe-source /usr/share/doc/fzf/examples/completion.zsh
+maybe-source /usr/share/fzf/completion.zsh
+maybe-source /usr/share/fzf/key-bindings.zsh
