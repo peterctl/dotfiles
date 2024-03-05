@@ -32,6 +32,7 @@ zplug load
 
 # Settings for the spaceship theme.
 export SPACESHIP_CHAR_SYMBOL="$ "
+export SPACESHIP_CHAR_SYMBOL_SUCCESS=$SPACESHIP_CHAR_SYMBOL
 export SPACESHIP_CHAR_SYMBOL_ROOT="# "
 export SPACESHIP_CHAR_SYMBOL_SECONDARY="> "
 export SPACESHIP_EXIT_CODE_SHOW="true"
