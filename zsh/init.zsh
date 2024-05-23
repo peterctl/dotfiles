@@ -1,3 +1,10 @@
+#!/usr/bin/env zsh
+
+# Emulate bash's _have function
+function _have () {
+    type $1 &> /dev/null
+}
+
 # Detect running OS.
 case "$(uname -s)" in
     Linux*)  machine="linux";;
@@ -98,7 +105,9 @@ HISTSIZE=1000
 SAVEHIST=$HISTSIZE
 setopt appendhistory
 
+# Other options.
 setopt extendedglob
+setopt interactivecomments
 
 # Add GOPATH to PATH
 GOPATH=~/go
