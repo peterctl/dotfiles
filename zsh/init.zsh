@@ -21,15 +21,22 @@ ZSHROOT=${0:a:h}
 # WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # Original
 WORDCHARS='*?[]~&;!#$%^(){}<>'
 
-# Plugins
-source ~/.zplug/init.zsh
+# Ensure ZPlug is installed.
+export ZPLUG_HOME=~/.zplug
+if ! test -f $ZPLUG_HOME/init.zsh; then
+  git clone https://github.com/zplug/zplug $ZPLUG_HOME
+fi
 
+# Declare ZPlug plugins.
+source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "marlonrichert/zsh-edit"
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+zplug "spaceship-prompt/spaceship-vi-mode"
 
+# Install the plugins.
 if ! zplug check; then
     if ! zplug install; then
         echo "[ERROR] Could not install zplug plugins. Please run 'zplug install' manually"
@@ -37,9 +44,13 @@ if ! zplug check; then
 fi
 zplug load
 
+eval spaceship_vi_mode_enable
+spaceship add --after line_sep vi_mode
+
 # Settings for the spaceship theme.
 export SPACESHIP_CHAR_SYMBOL="$ "
 export SPACESHIP_CHAR_SYMBOL_SUCCESS=$SPACESHIP_CHAR_SYMBOL
+export SPACESHIP_CHARM_SYMBOL_FAILURE=$SPACESHIP_CHAR_SYMBOL
 export SPACESHIP_CHAR_SYMBOL_ROOT="# "
 export SPACESHIP_CHAR_SYMBOL_SECONDARY="> "
 export SPACESHIP_EXIT_CODE_SHOW="true"
