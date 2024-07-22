@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+# Configs.
+USE_VIM_MODE=${USE_VIM_MODE:-false}
+
 # Emulate bash's _have function
 function _have () {
     type $1 &> /dev/null
@@ -34,7 +37,9 @@ zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "marlonrichert/zsh-edit"
 zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-zplug "spaceship-prompt/spaceship-vi-mode"
+if $USE_VIM_MODE; then
+  zplug "spaceship-prompt/spaceship-vi-mode"
+fi
 
 # Install the plugins.
 if ! zplug check; then
@@ -44,8 +49,11 @@ if ! zplug check; then
 fi
 zplug load
 
-eval spaceship_vi_mode_enable
-spaceship add --after line_sep vi_mode
+# Enable Vim mode.
+if $USE_VIM_MODE; then
+  eval spaceship_vi_mode_enable
+  spaceship add --after line_sep vi_mode
+fi
 
 # Settings for the spaceship theme.
 export SPACESHIP_CHAR_SYMBOL="$ "
