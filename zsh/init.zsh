@@ -153,6 +153,7 @@ maybe-source /usr/share/doc/fzf/examples/key-bindings.zsh
 maybe-source /usr/share/doc/fzf/examples/completion.zsh
 maybe-source /usr/share/fzf/completion.zsh
 maybe-source /usr/share/fzf/key-bindings.zsh
+maybe-source ~/.novarc
 
 # Setup preferred editor.
 for editor in nvim vim vi; do
