@@ -105,10 +105,16 @@ install_tmux() {
     fi
 }
 
+# Ghostty target.
+install_ghostty() {
+    ln -sf ${DOTROOT/\~/$HOME}/ghostty ~/.config/ghostty
+    info "Ghostty user config linked"
+}
+
 # If no targets were given then install all of them.
 if [[ $# -eq 0 ]]; then
     install_lazyvim
-    install_spacevim
+    install_ghostty
     install_zsh
     install_tmux
     exit
@@ -116,13 +122,13 @@ fi
 
 # Install given targets only.
 while [[ $# -gt 0 ]]; do
-    TARGET=$(echo "$1" | tr "[:upper:]" "[:lower:]")
+    target=$(echo "$1" | tr "[:upper:]" "[:lower:]")
     shift
-    case "$TARGET" in
-        nvim|neovim|lazyvim)
+    case "$target" in
+        lazyvim)
             install_lazyvim
             ;;
-        vim)
+        spacevim)
             install_spacevim
             ;;
         zsh)
@@ -130,6 +136,9 @@ while [[ $# -gt 0 ]]; do
             ;;
         tmux)
             install_tmux
+            ;;
+        ghostty)
+            install_ghostty
             ;;
     esac
 done
