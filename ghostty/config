@@ -45,7 +45,7 @@
 term = xterm-256color
 
 theme = catppuccin-mocha.conf
-font-family = Hasklug Nerd Font Mono
+font-family = "Hasklug Nerd Font Mono"
 
 cursor-style = block
 shell-integration = detect
