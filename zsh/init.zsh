@@ -110,7 +110,7 @@ function __load_keybindings_from_inputrc () {
         eval "$(sed -e "$TESTS" $VALID_SOURCES)"
     fi
 }
-# __load_keybindings_from_inputrc
+__load_keybindings_from_inputrc
 
 # Bind keys for history substring search in regular mode.
 bindkey '^[[A' history-substring-search-up
