@@ -144,6 +144,7 @@ maybe-source() { test -f $1 && source $1; }
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 which kubectl >/dev/null && source <(kubectl completion zsh)
+which lxc >/dev/null && source <(lxc completion zsh)
 which fasd >/dev/null && eval "$(fasd --init auto)"
 maybe-source /etc/zsh_command_not_found
 maybe-source /snap/juju/current/bash_completions/juju
