@@ -36,10 +36,6 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "marlonrichert/zsh-edit"
-zplug "spaceship-prompt/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-if $USE_VIM_MODE; then
-  zplug "spaceship-prompt/spaceship-vi-mode"
-fi
 
 # Install the plugins.
 if ! zplug check; then
@@ -55,19 +51,9 @@ if $USE_VIM_MODE; then
   spaceship add --after line_sep vi_mode
 fi
 
-# Settings for the spaceship theme.
-export SPACESHIP_CHAR_SYMBOL="$ "
-export SPACESHIP_CHAR_SYMBOL_SUCCESS=$SPACESHIP_CHAR_SYMBOL
-export SPACESHIP_CHARM_SYMBOL_FAILURE=$SPACESHIP_CHAR_SYMBOL
-export SPACESHIP_CHAR_SYMBOL_ROOT="# "
-export SPACESHIP_CHAR_SYMBOL_SECONDARY="> "
-export SPACESHIP_EXIT_CODE_SHOW="true"
-export SPACESHIP_EXIT_CODE_SYMBOL="!"
-export SPACESHIP_JOBS_SYMBOL="\u231B"
-export SPACESHIP_GIT_STATUS_DELETED="x"
-if [[ "$machine" == "macos" ]]; then
-    export SPACESHIP_DIR_LOCK_SYMBOL=" \U1F512"
-fi
+source $ZSHROOT/vivid.zsh
+source $ZSHROOT/carapace.zsh
+source $ZSHROOT/starship.zsh
 
 # Colorize output.
 if [[ "$machine" == "macos" ]]; then
