@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-# Configs.
-USE_VIM_MODE=${USE_VIM_MODE:-false}
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
 
 # Emulate bash's _have function
 function _have () {
@@ -36,6 +36,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "marlonrichert/zsh-edit"
+zplug "Aloxaf/fzf-tab"
 
 # Install the plugins.
 if ! zplug check; then
@@ -44,16 +45,6 @@ if ! zplug check; then
     fi
 fi
 zplug load
-
-# Enable Vim mode.
-if $USE_VIM_MODE; then
-  eval spaceship_vi_mode_enable
-  spaceship add --after line_sep vi_mode
-fi
-
-source $ZSHROOT/vivid.zsh
-source $ZSHROOT/carapace.zsh
-source $ZSHROOT/starship.zsh
 
 # Colorize output.
 if [[ "$machine" == "macos" ]]; then
@@ -99,8 +90,8 @@ function __load_keybindings_from_inputrc () {
 __load_keybindings_from_inputrc
 
 # Bind keys for history substring search in regular mode.
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
@@ -114,38 +105,7 @@ setopt appendhistory
 setopt extendedglob
 setopt interactivecomments
 
-# Add GOPATH to PATH
-GOPATH=~/go
-if [ -d $GOPATH ]; then
-  GOBIN=$GOPATH/bin
-  PATH=$GOBIN:$PATH
-fi
-
-if ! ( echo $PATH | grep ~/.local/bin ) >/dev/null; then
-  PATH=~/.local/bin:$PATH
-fi
-
-# Setup command completions
-maybe-source() { test -f $1 && source $1; }
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-which kubectl >/dev/null && source <(kubectl completion zsh)
-which lxc >/dev/null && source <(lxc completion zsh)
-which fasd >/dev/null && eval "$(fasd --init auto)"
-maybe-source /etc/zsh_command_not_found
-maybe-source /snap/juju/current/bash_completions/juju
-maybe-source /snap/lxd/current/etc/bash_completion.d/snap.lxd.lxc
-maybe-source /usr/share/bash-completion/completions/juju
-maybe-source /usr/share/doc/fzf/examples/key-bindings.zsh
-maybe-source /usr/share/doc/fzf/examples/completion.zsh
-maybe-source /usr/share/fzf/completion.zsh
-maybe-source /usr/share/fzf/key-bindings.zsh
-maybe-source ~/.novarc
-
-# Setup preferred editor.
-for editor in nvim vim vi; do
-  if which $editor > /dev/null; then
-    export EDITOR=$editor
-    break
-  fi
-done
+source $ZSHROOT/vivid.zsh
+source $ZSHROOT/starship.zsh
+source $ZSHROOT/environment.zsh
+source $ZSHROOT/autocomplete.zsh
