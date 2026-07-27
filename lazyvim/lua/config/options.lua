@@ -7,4 +7,4 @@ vim.g.autoformat = false
 vim.opt.colorcolumn = { 80, 100, 120 }
 vim.opt.whichwrap = "b,s,<,>,h,l,[,]"
 
-vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "pyrefly"
