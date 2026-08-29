@@ -17,6 +17,9 @@ if ! which carapace >/dev/null; then
   sudo dpkg -i /tmp/$PKG_NAME
 fi
 
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
+
 # Setup command completions
 maybe-source() { test -f $1 && source $1; }
 which kubectl >/dev/null && source <(kubectl completion zsh)
@@ -39,5 +42,5 @@ zstyle ':completion:*' menu select
 source <(carapace _carapace)
 
 if which fzf >/dev/null; then
-  source <(fzf --zsh)
+  source <(fzf --zsh 2>/dev/null)
 fi
