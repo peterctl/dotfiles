@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Add GOPATH to PATH
 GOPATH=~/go
 if [ -d $GOPATH ]; then

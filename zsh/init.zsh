@@ -8,22 +8,22 @@ function _have () {
 # Detect running OS.
 case "$(uname -s)" in
     Linux*)  machine="linux";;
-    Darwin*) machine="macos";;
+    Darwin*) machine="darwin";;
     CYGWIN*) machine="cygwin";;
     MINGW*)  machine="mingw";;
     *)       machine="unknown";;
 esac
 
 # Detect running architecture.
-arch=$(uname -m)
-case $arch in
-  i386) arch="386";;
-  x86_64) arch="amd64";;
-  arm | aarc64) arch="arm64";;
+ARCH=$(uname -m)
+case $ARCH in
+  i386) ARCH="386";;
+  x86_64) ARCH="amd64";;
+  arm | aarc64) ARCH="arm64";;
 esac
 
 # Directory containing current file.
-ZSHROOT=${0:a:h}
+ZSHROOT="${0:a:h}"
 
 # Remove some chars from wordchars so that they're taken as word delimiters.
 # orig  = '*?_-.[]~=/&;!#$%^(){}<>' # Original
@@ -39,10 +39,14 @@ setopt appendhistory
 setopt extendedglob
 setopt interactivecomments
 
+# Colorscheme.
+COLORSCHEME="catppuccin-mocha"
+
+source $ZSHROOT/environment.zsh
 source $ZSHROOT/plugins.zsh
 source $ZSHROOT/keybindings.zsh
 source $ZSHROOT/aliases.zsh
+source $ZSHROOT/colorize.zsh
 source $ZSHROOT/vivid.zsh
 source $ZSHROOT/starship.zsh
-source $ZSHROOT/environment.zsh
 source $ZSHROOT/autocomplete.zsh

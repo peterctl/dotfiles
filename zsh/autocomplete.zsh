@@ -1,16 +1,8 @@
 #!/usr/bin/env zsh
 
 CARAPACE_VERSION=1.6.4
-
-arch=$(uname -m)
-case $arch in
-  i386) arch="386" ;;
-  x86_64) arch="amd64" ;;
-  arm | aarc64) arch="arm64" ;;
-esac
-
-PKG_NAME=carapace-bin_${CARAPACE_VERSION}_linux_${arch}.deb
-CARAPACE_URL=https://github.com/carapace-sh/carapace-bin/releases/download/v${CARAPACE_VERSION}/$PKG_NAME
+PKG_NAME="carapace-bin_${CARAPACE_VERSION}_${MACHINE}_${ARCH}.deb"
+CARAPACE_URL="https://github.com/carapace-sh/carapace-bin/releases/download/v${CARAPACE_VERSION}/${PKG_NAME}"
 
 if ! which carapace >/dev/null; then
   curl -fL $CARAPACE_URL -o /tmp/$PKG_NAME
