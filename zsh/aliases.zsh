@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Colorize output.
-if [[ "$machine" == "darwin" ]]; then
+if [[ "$MACHINE" == "darwin" ]]; then
     export CLICOLOR=1
     lscmd='ls'
 else

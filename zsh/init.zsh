@@ -7,11 +7,11 @@ function _have () {
 
 # Detect running OS.
 case "$(uname -s)" in
-    Linux*)  machine="linux";;
-    Darwin*) machine="darwin";;
-    CYGWIN*) machine="cygwin";;
-    MINGW*)  machine="mingw";;
-    *)       machine="unknown";;
+    Linux*)  MACHINE="linux";;
+    Darwin*) MACHINE="darwin";;
+    CYGWIN*) MACHINE="cygwin";;
+    MINGW*)  MACHINE="mingw";;
+    *)       MACHINE="unknown";;
 esac
 
 # Detect running architecture.
