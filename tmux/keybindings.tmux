@@ -5,6 +5,9 @@ unbind -T copy-mode-vi MouseDragEnd1Pane
 # Use vim style keybindings
 set -g mode-keys vi
 
+# Allow modified Enter keys for pi-coding-agent.
+set -g extended-keys on
+
 # Add C-space as an alternative prefix.
 set -g prefix2 C-space
 bind-key C-space send-prefix -2
