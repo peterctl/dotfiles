@@ -43,6 +43,11 @@ setopt interactivecomments
 COLORSCHEME="catppuccin-mocha"
 vivid_theme="$COLORSCHEME"
 
+# Vi mode
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+VI_MODE_SET_CURSOR=true
+VI_MODE_CURSOR_INSERT=1
+
 source $ZSHROOT/environment.zsh
 source $ZSHROOT/plugins.zsh
 source $ZSHROOT/keybindings.zsh
