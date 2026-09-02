@@ -12,6 +12,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "marlonrichert/zsh-edit"
+zplug "ryanccn/vivid-zsh"
 zplug "Aloxaf/fzf-tab"
 
 zplug "plugins/colored-man-pages",  from:oh-my-zsh

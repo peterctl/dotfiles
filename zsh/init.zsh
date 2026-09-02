@@ -41,12 +41,12 @@ setopt interactivecomments
 
 # Colorscheme.
 COLORSCHEME="catppuccin-mocha"
+vivid_theme="$COLORSCHEME"
 
 source $ZSHROOT/environment.zsh
 source $ZSHROOT/plugins.zsh
 source $ZSHROOT/keybindings.zsh
 source $ZSHROOT/aliases.zsh
 source $ZSHROOT/colorize.zsh
-source $ZSHROOT/vivid.zsh
 source $ZSHROOT/starship.zsh
 source $ZSHROOT/autocomplete.zsh
