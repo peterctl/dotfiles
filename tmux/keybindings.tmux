@@ -7,6 +7,7 @@ set -g mode-keys vi
 
 # Allow modified Enter keys for pi-coding-agent.
 set -g extended-keys on
+set -g extended-keys-format csi-u
 
 # Add C-space as an alternative prefix.
 set -g prefix2 C-space
