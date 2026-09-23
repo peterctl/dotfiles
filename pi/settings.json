@@ -1,0 +1,26 @@
+{
+  "theme": "dark",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-8",
+  "packages": [
+    "npm:pi-powerline-footer",
+    "git:github.com/peterctl/pi-docker-model-runner",
+    "npm:pi-mcp-adapter",
+    "npm:pi-web-access",
+    "npm:pi-subagents",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@tintinweb/pi-subagents",
+    "npm:pi-background-tasks",
+    "npm:pi-lens",
+    "npm:@ff-labs/pi-fff",
+    "npm:@gotgenes/pi-permission-system",
+    "npm:@quintinshaw/pi-dynamic-workflows",
+    "npm:@mjasnikovs/pi-task",
+    "npm:@narumitw/pi-plan-mode",
+    "npm:billion-context",
+    "npm:context-mode",
+    "npm:pi-memory"
+  ],
+  "lastChangelogVersion": "0.84.4"
+}

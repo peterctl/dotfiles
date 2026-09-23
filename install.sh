@@ -110,6 +110,17 @@ install_ghostty() {
   info "Ghostty user config linked"
 }
 
+# Pi target.
+install_pi() {
+  mkdir -p ~/.pi/agent
+  ln -sf "${DOTROOT/\~/$HOME}/pi/settings.json" ~/.pi/agent/settings.json
+  ln -sfn "${DOTROOT/\~/$HOME}/pi/extensions" ~/.pi/agent/extensions
+  ln -sfn "${DOTROOT/\~/$HOME}/pi/skills" ~/.pi/agent/skills
+  ln -sfn "${DOTROOT/\~/$HOME}/pi/prompts" ~/.pi/agent/prompts
+  ln -sfn "${DOTROOT/\~/$HOME}/pi/themes" ~/.pi/agent/themes
+  info "Pi user config linked"
+}
+
 # Install the catppuccin-macchiato theme for the GitUI TUI.
 install_gitui() {
   theme_url="https://raw.githubusercontent.com/catppuccin/gitui/refs/heads/main/themes/catppuccin-macchiato.ron"
@@ -124,6 +135,7 @@ if [[ $# -eq 0 ]]; then
   install_ghostty
   install_zsh
   install_tmux
+  install_pi
   install_gitui
   exit
 fi
@@ -147,6 +159,9 @@ while [[ $# -gt 0 ]]; do
     ;;
   ghostty)
     install_ghostty
+    ;;
+  pi)
+    install_pi
     ;;
   gitui)
     install_gitui
